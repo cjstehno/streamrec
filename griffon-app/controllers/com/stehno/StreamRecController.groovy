@@ -19,6 +19,10 @@ class StreamRecController {
         }
     }
 
+    void toggleLimiting(){
+        model.streamLimited = !model.streamLimited
+    }
+
     void start() {
         log.info 'Started!'
     }

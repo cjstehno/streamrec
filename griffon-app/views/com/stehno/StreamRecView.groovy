@@ -38,9 +38,8 @@ class StreamRecView {
                 panel {
                     gridLayout(rows: 1, cols: 2)
                     panel {
-                        checkBox()
-                        label(text: 'Limit to ')
-                        spinner(preferredSize: [50, 30], enabled: false)
+                        checkBox(text: 'Limit to', selected: bind { model.streamLimited }, toggleLimitingAction)
+                        spinner(preferredSize: [50, 30], enabled: bind { model.streamLimited })
                         label(text: 'MB')
                     }
                     panel {

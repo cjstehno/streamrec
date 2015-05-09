@@ -9,4 +9,5 @@ class StreamRecModel {
 
     @Observable String streamUrl = 'http://'
     @Observable File recordingFile
+    @Observable boolean streamLimited = false
 }
