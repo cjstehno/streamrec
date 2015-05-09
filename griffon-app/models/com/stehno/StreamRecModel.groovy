@@ -8,14 +8,17 @@ import griffon.transform.PropertyListener
 @ArtifactProviderFor(GriffonModel)
 class StreamRecModel {
 
-    @Observable @PropertyListener(validator)
+    @Observable @PropertyListener(enabler)
     String streamUrl
 
-    @Observable @PropertyListener(validator)
+    @Observable @PropertyListener(enabler)
     File recordingFile
 
     @Observable
     boolean streamLimited = false
+
+    @Observable
+    long byteLimit
 
     @Observable
     boolean valid = false
@@ -23,15 +26,15 @@ class StreamRecModel {
     @Observable
     boolean recording = false
 
-    def validator = { evt ->
+    def enabler = { evt ->
         valid = isValidUrl(streamUrl) && recordingFile
     }
 
-    private static boolean isValidUrl(String url){
+    private static boolean isValidUrl(String url) {
         // this is hacky but fine for this demo
         try {
             return url && new URL(url)
-        } catch (ex){
+        } catch (ex) {
             return false
         }
     }

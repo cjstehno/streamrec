@@ -3,6 +3,7 @@ package com.stehno
 import griffon.core.artifact.GriffonController
 import griffon.metadata.ArtifactProviderFor
 
+import javax.inject.Inject
 import javax.swing.*
 
 import static javax.swing.JFileChooser.APPROVE_OPTION
@@ -11,6 +12,8 @@ import static javax.swing.JFileChooser.APPROVE_OPTION
 class StreamRecController {
 
     StreamRecModel model
+
+    @Inject StreamRecorderService streamRecorderService
 
     void selectFile() {
         JFileChooser chooser = new JFileChooser()
@@ -28,12 +31,18 @@ class StreamRecController {
     }
 
     void start() {
-        log.info 'Start recording stream ({}) into file ({}).', model.streamUrl, model.recordingFile
         model.recording = true
+
+        runInsideUIAsync {
+            streamRecorderService.startRecording(new URL(model.streamUrl), model.recordingFile, model.byteLimit)
+        }
     }
 
     void stop() {
-        log.info 'Stopped recording.'
         model.recording = false
+
+        runInsideUIAsync {
+            streamRecorderService.stopRecording()
+        }
     }
 }

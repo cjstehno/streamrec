@@ -1,7 +1,8 @@
 package com.stehno
-
 import griffon.core.artifact.GriffonView
 import griffon.metadata.ArtifactProviderFor
+
+import javax.swing.SpinnerNumberModel
 
 import static javax.swing.SwingConstants.RIGHT
 
@@ -49,7 +50,9 @@ class StreamRecView {
                             toggleLimitingAction
                         )
                         spinner(
-                            preferredSize: [50, 30],
+                            model: new SpinnerNumberModel(0,0,1000,1),
+                            preferredSize: [60, 30],
+                            value: bind('byteLimit', target:model, mutual: true, converter:{ x-> x * 1024}, reverseConverter:{ x-> x/1024}),
                             enabled: bind { model.streamLimited && !model.recording }
                         )
                         label(text: 'MB')
