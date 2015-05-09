@@ -19,6 +19,11 @@ class StreamRecController {
         }
     }
 
+    /*
+        url and file must be specified before start is enabled
+        start must be active for stop to be enabled
+     */
+
     void toggleLimiting(){
         model.streamLimited = !model.streamLimited
     }

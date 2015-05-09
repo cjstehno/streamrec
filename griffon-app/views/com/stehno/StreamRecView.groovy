@@ -28,7 +28,10 @@ class StreamRecView {
                 gridLayout(rows: 4, cols: 1)
                 panel {
                     label(text: 'Stream:', preferredSize: [50, 30], horizontalAlignment: RIGHT)
-                    textField(text: bind { model.streamUrl }, preferredSize: [400, 30])
+                    textField(
+                        text: bind('streamUrl', target:model, mutual:true),
+                        preferredSize: [400, 30]
+                    )
                 }
                 panel {
                     label(text: 'File:', preferredSize: [50, 30], horizontalAlignment: RIGHT)
@@ -50,7 +53,7 @@ class StreamRecView {
 
                 }
                 panel {
-                    button(text: 'Start', enabled: false, startAction)
+                    button(text: 'Start', enabled: bind { model.valid }, startAction)
                     button(text: 'Stop', enabled: false, stopAction)
                 }
             }
