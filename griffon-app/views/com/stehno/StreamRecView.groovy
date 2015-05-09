@@ -29,20 +29,29 @@ class StreamRecView {
                 panel {
                     label(text: 'Stream:', preferredSize: [50, 30], horizontalAlignment: RIGHT)
                     textField(
-                        text: bind('streamUrl', target:model, mutual:true),
-                        preferredSize: [400, 30]
+                        text: bind('streamUrl', target: model, mutual: true),
+                        preferredSize: [400, 30],
+                        enabled: bind { !model.recording }
                     )
                 }
                 panel {
                     label(text: 'File:', preferredSize: [50, 30], horizontalAlignment: RIGHT)
                     textField(text: bind { model.recordingFile }, preferredSize: [360, 30], enabled: false)
-                    button(text: '...', selectFileAction)
+                    button(text: '...', enabled: bind { !model.recording }, selectFileAction)
                 }
                 panel {
                     gridLayout(rows: 1, cols: 2)
                     panel {
-                        checkBox(text: 'Limit to', selected: bind { model.streamLimited }, toggleLimitingAction)
-                        spinner(preferredSize: [50, 30], enabled: bind { model.streamLimited })
+                        checkBox(
+                            text: 'Limit to',
+                            selected: bind { model.streamLimited },
+                            enabled: bind { !model.recording },
+                            toggleLimitingAction
+                        )
+                        spinner(
+                            preferredSize: [50, 30],
+                            enabled: bind { model.streamLimited && !model.recording }
+                        )
                         label(text: 'MB')
                     }
                     panel {
@@ -53,8 +62,8 @@ class StreamRecView {
 
                 }
                 panel {
-                    button(text: 'Start', enabled: bind { model.valid }, startAction)
-                    button(text: 'Stop', enabled: false, stopAction)
+                    button(text: 'Start', enabled: bind { model.valid && !model.recording }, startAction)
+                    button(text: 'Stop', enabled: bind { model.recording }, stopAction)
                 }
             }
         }

@@ -20,7 +20,19 @@ class StreamRecModel {
     @Observable
     boolean valid = false
 
+    @Observable
+    boolean recording = false
+
     def validator = { evt ->
-        valid = streamUrl?.size() > 10 && recordingFile
+        valid = isValidUrl(streamUrl) && recordingFile
+    }
+
+    private static boolean isValidUrl(String url){
+        // this is hacky but fine for this demo
+        try {
+            return url && new URL(url)
+        } catch (ex){
+            return false
+        }
     }
 }

@@ -20,7 +20,6 @@ class StreamRecController {
     }
 
     /*
-        url and file must be specified before start is enabled
         start must be active for stop to be enabled
      */
 
@@ -29,10 +28,12 @@ class StreamRecController {
     }
 
     void start() {
-        log.info 'Started!'
+        log.info 'Start recording stream ({}) into file ({}).', model.streamUrl, model.recordingFile
+        model.recording = true
     }
 
     void stop() {
-        log.info 'Stopped!'
+        log.info 'Stopped recording.'
+        model.recording = false
     }
 }
