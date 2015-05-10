@@ -3,6 +3,10 @@
 This is a Griffon-based rework of my old StreamRecorder application, written in 2002 to play with downloading web-based 
 media streams. Converting this application seemed like a good opportunity to learn Griffon.
 
+> Note: somewhere along the line this stopped working (even the old version); maybe stream servers have changed over the past 13 years. At this point
+this application does nothing more than demonstrate the UI development with Griffon then simply logs the interaction with the backend. I really don't 
+want to spend the time fixing something that I don't even need. Sorry.
+
 The original project code consisted of one Java file with no external dependencies:
 
 ```java

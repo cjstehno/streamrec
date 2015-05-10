@@ -58,6 +58,8 @@ dependencies {
     testCompile "org.codehaus.griffon:griffon-fest-test:${griffon.version}"
     testCompile 'org.spockframework:spock-core:0.7-groovy-2.0'
     testCompile 'com.jayway.awaitility:awaitility-groovy:1.6.3'
+
+    compile 'org.codehaus.groovy.modules.http-builder:http-builder:0.7.1'
 }
 
 tasks.withType(JavaCompile) {
